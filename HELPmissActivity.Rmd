@@ -1,9 +1,8 @@
 ---
-title: "HELPmiss (Data Verbs) Activity"
-author: "YOUR NAME HERE"
+title:  "HELPmiss (Data Verbs) Activity"
+author: "Dave Friedman"
 output: html_notebook
 ---
-
 
 ## Set Up:
 
@@ -14,10 +13,8 @@ rm(list = ls())     # clean up your R environment
 library(tidyverse)  # includes lots of data verbs like `group_by()` and `summarise()`
 library(mosaicData) # includes the `HELPmiss` data set 
 
-
 # Load the `HELPmiss` data set into our RStudio environment
 data("HELPmiss", package = "mosaicData")
-
 ```
 
 ## Helpful links: 
@@ -27,19 +24,39 @@ data("HELPmiss", package = "mosaicData")
   - <https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf> 
   - <https://www.rstudio.com/resources/cheatsheets/>
   - <https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Tidyverse+Cheat+Sheet.pdf>
-  
-
-
 
 ## Task 1: Data Description
 
 *Write several sentences (or a bullet list) describing the HELP Study and the resulting `HELPmiss` data.  Your description should investigate basic data provenance (e.g., Who, What, When, Where, Why, How), explain the setting for the data, specify what each case represents in the data, and remark on inclusion/exclusion criteria.* 
 
-
 - investigate by searching R help documentation
 - there's a research paper cited where additional detail is provided
 
+The HELP study was a clinical trial for adult inpatients recruited
+from a detoxification unit.  Patients with no primary care
+physician were randomized to receive a multidisciplinary
+assessment and a brief motivational intervention or usual care,
+with the goal of linking them to primary medical care.
 
+Eligible subjects were adults, who spoke Spanish or English,
+reported alcohol, heroin or cocaine as their first or second drug
+of choice, resided in proximity to the primary care clinic to
+which they would be referred or were homeless. Patients with
+established primary care relationships they planned to continue,
+significant dementia, specific plans to leave the Boston area that
+would prevent research participation, failure to provide contact
+information for tracking purposes, or pregnancy were excluded.
+
+Subjects were interviewed at baseline during their detoxification
+stay and follow-up interviews were undertaken every 6 months for 2
+years.  A variety of continuous, count, discrete, and survival
+time predictors and outcomes were collected at each of these five
+occasions.
+
+This dataset is a superset of the HELPrct data with 17 subjects
+with partially observed data on some of the baseline variables.
+This is a subset of the HELPfull data which includes 5 timepoints
+and many additional variables.
 
 ## Task 2: Basic Summaries 
 
@@ -48,32 +65,33 @@ data("HELPmiss", package = "mosaicData")
 1. number of people (cases) in `HELPmiss` study
 
 ```{r}
-#Your code here 
-
+HELPmiss %>%
+  summarize(
+    count = n()
+  )
 ```
 
 2. total number of times in the past 6 months entered a detox program (measured at baseline) for all the people in `HELPmiss`. 
 
 ```{r}
-#Your code here 
-
+HELPmiss %>%
+  summarize(
+    total_e2b = sum(e2b, na.rm=TRUE)
+  )
 ```
-
 
 3. mean time (in days) to first use of any substance post-detox for all the people in `HELPmiss`
 
-
 ```{r}
-#Your code here 
-
+HELPmiss %>%
+  summarize(
+    mean_daysanysub = mean(daysanysub, na.rm=TRUE)
+  )
 ```
-
-
 
 ## Task 3: Group Summaries  
 
 *Repeat task 2 above, but add code chunks to calculate result group-by-group according to each prompt (i.e. each promt should have three statements for each of the three prompts in task 2).  Be sure to show all R code and write a sentence or two about what you observe in the results. Remember, you can add multiple statistics inside `summary`.* 
-
 
 - males versus females
 - homeless or not
