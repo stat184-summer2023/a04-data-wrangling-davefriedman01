@@ -101,36 +101,58 @@ HELPmiss %>%
 
 ### males versus females
 ```{r}
-#Your code here
-
+HELPmiss %>%
+  group_by(sex) %>%
+    summarize(
+      count           = n(),
+      total_e2b       = sum(e2b, na.rm=TRUE),
+      mean_daysanysub = mean(daysanysub, na.rm=TRUE)
+    )
 ```
 
 ### homeless or not
 ```{r}
-#Your code here
-
+HELPmiss %>%
+  group_by(homeless) %>%
+    summarize(
+      count           = n(),
+      total_e2b       = sum(e2b, na.rm=TRUE),
+      mean_daysanysub = mean(daysanysub, na.rm=TRUE)
+    )
 ```
-
 
 ### substance
 ```{r}
-#Your code here
-
+HELPmiss %>%
+  group_by(substance) %>%
+    summarize(
+      count           = n(),
+      total_e2b       = sum(e2b, na.rm=TRUE),
+      mean_daysanysub = mean(daysanysub, na.rm=TRUE)
+    )
 ```
 
 ### homeless versus housed broken down by sex
 ```{r}
-#Your code here
-
+HELPmiss %>%
+  group_by(homeless, sex) %>%
+    summarize(
+      count           = n(),
+      total_e2b       = sum(e2b, na.rm=TRUE),
+      mean_daysanysub = mean(daysanysub, na.rm=TRUE)
+    )
 ```
 
 ### homeless versus housed broken down by substance
 ```{r}
-#Your code here
-
+HELPmiss %>%
+  group_by(homeless, substance) %>%
+    summarize(
+      count           = n(),
+      total_e2b       = sum(e2b, na.rm=TRUE),
+      mean_daysanysub = mean(daysanysub, na.rm=TRUE)
+    )
 ```
-
-
 
 ## Task 4: Data Visualization & Observations
 
@@ -138,11 +160,7 @@ HELPmiss %>%
 
 *Remember, you can use* `esquisser` *or* `mplot` *in your console. But only include the ggplot code in this Rmd document.*
 
-
 ```{r}
 # Your Code here.
 
 ```
-
-
-
