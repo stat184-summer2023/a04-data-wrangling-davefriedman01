@@ -32,7 +32,7 @@ data("HELPmiss", package = "mosaicData")
 - investigate by searching R help documentation
 - there's a research paper cited where additional detail is provided
 
-The HELP study was a clinical trial for adult inpatients recruited
+"The HELP study was a clinical trial for adult inpatients recruited
 from a detoxification unit.  Patients with no primary care
 physician were randomized to receive a multidisciplinary
 assessment and a brief motivational intervention or usual care,
@@ -56,7 +56,7 @@ occasions.
 This dataset is a superset of the HELPrct data with 17 subjects
 with partially observed data on some of the baseline variables.
 This is a subset of the HELPfull data which includes 5 timepoints
-and many additional variables.
+and many additional variables."
 
 ## Task 2: Basic Summaries 
 
@@ -159,8 +159,17 @@ HELPmiss %>%
 *Include one or more interesting plots from this data set involving at least 3 variables per plot. Write a few sentences to explain the story that your plot tells about these data.  You can expand on the relationships that you studied in Task 2, or you can explore a different group of variables in `HELPmiss` that show something interesting. Remember to use the interactive commands in the console, generate the R commands that will reproduce your plot, and then paste the R commands into an R chunk in the RMarkdown file.*  
 
 *Remember, you can use* `esquisser` *or* `mplot` *in your console. But only include the ggplot code in this Rmd document.*
+ 
+Most of the data pertain to black and white males. It appears as though black males are most likely to abuse cocaine and white males are most likely to abuse alcohol over the course of their life. The same trend arguably exists for females.
 
 ```{r}
-# Your Code here.
-
+ggplot(data = HELPmiss) +
+  geom_bar(
+    mapping  = aes(x    = age,
+                   fill = substance),
+    position = 'stack',
+    stat     = 'count',
+    show.legend=TRUE
+  ) +
+  facet_grid(sex ~ racegrp)
 ```
